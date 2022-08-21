@@ -8,9 +8,10 @@
   box-sizing: border-box;
 }
 
-.row {
+ul {
   display: flex;
   list-style: none;
+  font-weight: 500;
 }
 
 li {
@@ -27,17 +28,15 @@ li {
 }
 
 .pinky {
-  border: 2px solid crimson;
   background-color: crimson;
-}
-
-.ring.selected {
-  color: coral;
+  border: 2px solid crimson;
+  box-shadow: -3px 4px 0 #333;
 }
 
 .ring {
   background-color: coral;
   border: 2px solid coral;
+  box-shadow: -3px 4px 0 #333;
 }
 
 .ring.selected {
@@ -47,6 +46,7 @@ li {
 .middle {
   background-color: darkorange;
   border: 2px solid darkorange;
+  box-shadow: -3px 4px 0 #333;
 }
 
 .middle.selected {
@@ -56,7 +56,9 @@ li {
 .pointer1st {
   background-color: gold;
   border: 2px solid gold;
+  box-shadow: -3px 4px 0 #333;
 }
+
 .pointer1st.selected {
   color: gold;
 }
@@ -64,7 +66,9 @@ li {
 .pointer2nd {
   background-color: khaki;
   border: 2px solid khaki;
+  box-shadow: -3px 4px 0 #333;
 }
+
 .pointer2nd.selected {
   color: khaki;
 }
