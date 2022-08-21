@@ -1,7 +1,7 @@
 function keyboard() {
   return (
-    <div className="flex flex-col">
-      <ul className="row row-0">
+    <div className="flex flex-col border-slate-300 border-2 rounded p-2">
+      <ul className="row-0">
         <li className="pinky" id="esc">
           ESC
         </li>
@@ -41,7 +41,7 @@ function keyboard() {
           BACK
         </li>
       </ul>
-      <ul className="row row-1">
+      <ul className="row-1">
         <li className="pinky w-20" id="tab">
           TAB
         </li>
@@ -79,7 +79,7 @@ function keyboard() {
         <li className="pinky">]</li>
         <li className="pinky">\</li>
       </ul>
-      <ul className="row row-2">
+      <ul className="row-2">
         <li className="pinky w-24" id="caps">
           CAPS
         </li>
@@ -116,7 +116,7 @@ function keyboard() {
           ENTER
         </li>
       </ul>
-      <ul className="row row-3">
+      <ul className="row-3">
         <li className="pinky w-32" id="left-shift">
           SHIFT
         </li>
