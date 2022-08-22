@@ -1,4 +1,20 @@
+import { useEffect, useRef } from "react";
+
 function keyboard() {
+  const keyRef = useRef<HTMLLIElement>(null);
+
+  const keys = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+
+  function getRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  useEffect(() => {
+    if (!keyRef.current) return;
+    keys[getRandomNumber(0, keys.length - 1)];
+    keyRef.current.classList.add("selected");
+  }, [keyRef]);
+
   return (
     <div className="flex flex-col border-slate-300 border-2 rounded p-2">
       <ul className="row-0">
@@ -45,25 +61,25 @@ function keyboard() {
         <li className="pinky w-20" id="tab">
           TAB
         </li>
-        <li className="pinky" id="Q">
+        <li className="pinky" id="Q" ref={keyRef}>
           Q
         </li>
-        <li className="ring" id="W">
+        <li className="ring" id="W" ref={keyRef}>
           W
         </li>
-        <li className="middle" id="E">
+        <li className="middle" id="E" ref={keyRef}>
           E
         </li>
-        <li className="pointer1st" id="R">
+        <li className="pointer1st" id="R" ref={keyRef}>
           R
         </li>
-        <li className="pointer2nd" id="T">
+        <li className="pointer2nd" id="T" ref={keyRef}>
           T
         </li>
-        <li className="pointer2nd" id="Y">
+        <li className="pointer2nd" id="Y" ref={keyRef}>
           Y
         </li>
-        <li className="pointer1st" id="U">
+        <li className="pointer1st" id="U" ref={keyRef}>
           U
         </li>
         <li className="middle" id="I">
