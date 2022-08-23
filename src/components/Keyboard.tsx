@@ -1,12 +1,39 @@
 import { useEffect, useRef } from "react";
 
+const keys = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
 function keyboard() {
   const keyRef = useRef<HTMLLIElement>(null);
 
-  const keys = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
-
   function getRandomNumber(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   useEffect(() => {
