@@ -40,7 +40,7 @@ function keyboard() {
     if (!keyRef.current) return;
     keys[getRandomNumber(0, keys.length - 1)];
     keyRef.current.classList.add("selected");
-  }, [keyRef]);
+  }, []);
 
   return (
     <div className="flex flex-col border-slate-300 border-2 rounded p-2">
