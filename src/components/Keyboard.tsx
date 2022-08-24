@@ -36,10 +36,18 @@ function keyboard() {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  function selectRandomKey() {
+    const random = keys[getRandomNumber(0, keys.length - 1)];
+    const key = document.getElementById(random);
+    if (key) {
+      key.classList.add('selected');
+    } else {
+      console.error('Key value is null');
+    }
+  }
+
   useEffect(() => {
-    if (!keyRef.current) return;
-    keys[getRandomNumber(0, keys.length - 1)];
-    keyRef.current.classList.add('selected');
+    selectRandomKey();
   }, []);
 
   return (
