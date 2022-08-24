@@ -1,32 +1,32 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 const keys = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
 ];
 
 function keyboard() {
@@ -39,83 +39,159 @@ function keyboard() {
   useEffect(() => {
     if (!keyRef.current) return;
     keys[getRandomNumber(0, keys.length - 1)];
-    keyRef.current.classList.add("selected");
+    keyRef.current.classList.add('selected');
   }, []);
 
   return (
     <div className="flex flex-col border-slate-300 border-2 rounded p-2">
       <ul className="row-0">
-        <li className="pinky" id="esc">
+        <li
+          className="pinky"
+          id="esc"
+        >
           ESC
         </li>
-        <li className="pinky" id="1">
+        <li
+          className="pinky"
+          id="1"
+        >
           1
         </li>
-        <li className="ring" id="2">
+        <li
+          className="ring"
+          id="2"
+        >
           2
         </li>
-        <li className="middle" id="3">
+        <li
+          className="middle"
+          id="3"
+        >
           3
         </li>
-        <li className="pointer1st" id="4">
+        <li
+          className="pointer1st"
+          id="4"
+        >
           4
         </li>
-        <li className="pointer2nd" id="5">
+        <li
+          className="pointer2nd"
+          id="5"
+        >
           5
         </li>
-        <li className="pointer2nd" id="6">
+        <li
+          className="pointer2nd"
+          id="6"
+        >
           6
         </li>
-        <li className="pointer1st" id="7">
+        <li
+          className="pointer1st"
+          id="7"
+        >
           7
         </li>
-        <li className="middle" id="8">
+        <li
+          className="middle"
+          id="8"
+        >
           8
         </li>
-        <li className="ring" id="9">
+        <li
+          className="ring"
+          id="9"
+        >
           9
         </li>
-        <li className="pinky" id="10">
+        <li
+          className="pinky"
+          id="10"
+        >
           0
         </li>
         <li className="pinky">-</li>
         <li className="pinky">+</li>
-        <li className="pinky w-20" id="back">
+        <li
+          className="pinky w-20"
+          id="back"
+        >
           BACK
         </li>
       </ul>
       <ul className="row-1">
-        <li className="pinky w-20" id="tab">
+        <li
+          className="pinky w-20"
+          id="tab"
+        >
           TAB
         </li>
-        <li className="pinky" id="Q" ref={keyRef}>
+        <li
+          className="pinky"
+          id="Q"
+          ref={keyRef}
+        >
           Q
         </li>
-        <li className="ring" id="W" ref={keyRef}>
+        <li
+          className="ring"
+          id="W"
+          ref={keyRef}
+        >
           W
         </li>
-        <li className="middle" id="E" ref={keyRef}>
+        <li
+          className="middle"
+          id="E"
+          ref={keyRef}
+        >
           E
         </li>
-        <li className="pointer1st" id="R" ref={keyRef}>
+        <li
+          className="pointer1st"
+          id="R"
+          ref={keyRef}
+        >
           R
         </li>
-        <li className="pointer2nd" id="T" ref={keyRef}>
+        <li
+          className="pointer2nd"
+          id="T"
+          ref={keyRef}
+        >
           T
         </li>
-        <li className="pointer2nd" id="Y" ref={keyRef}>
+        <li
+          className="pointer2nd"
+          id="Y"
+          ref={keyRef}
+        >
           Y
         </li>
-        <li className="pointer1st" id="U" ref={keyRef}>
+        <li
+          className="pointer1st"
+          id="U"
+          ref={keyRef}
+        >
           U
         </li>
-        <li className="middle" id="I">
+        <li
+          className="middle"
+          id="I"
+        >
           I
         </li>
-        <li className="ring" id="O">
+        <li
+          className="ring"
+          id="O"
+        >
           O
         </li>
-        <li className="pinky" id="P">
+        <li
+          className="pinky"
+          id="P"
+        >
           P
         </li>
         <li className="pinky">[</li>
@@ -123,71 +199,131 @@ function keyboard() {
         <li className="pinky">\</li>
       </ul>
       <ul className="row-2">
-        <li className="pinky w-24" id="caps">
+        <li
+          className="pinky w-24"
+          id="caps"
+        >
           CAPS
         </li>
-        <li className="pinky" id="A">
+        <li
+          className="pinky"
+          id="A"
+        >
           A
         </li>
-        <li className="ring" id="S">
+        <li
+          className="ring"
+          id="S"
+        >
           S
         </li>
-        <li className="middle" id="D">
+        <li
+          className="middle"
+          id="D"
+        >
           D
         </li>
-        <li className="pointer1st" id="F">
+        <li
+          className="pointer1st"
+          id="F"
+        >
           F
         </li>
-        <li className="pointer2nd" id="G">
+        <li
+          className="pointer2nd"
+          id="G"
+        >
           G
         </li>
-        <li className="pointer2nd" id="H">
+        <li
+          className="pointer2nd"
+          id="H"
+        >
           H
         </li>
-        <li className="pointer1st" id="J">
+        <li
+          className="pointer1st"
+          id="J"
+        >
           J
         </li>
-        <li className="middle" id="K">
+        <li
+          className="middle"
+          id="K"
+        >
           K
         </li>
-        <li className="ring" id="L">
+        <li
+          className="ring"
+          id="L"
+        >
           L
         </li>
         <li className="pinky">:</li>
         <li className="pinky">''</li>
-        <li className="pinky w-24" id="enter">
+        <li
+          className="pinky w-24"
+          id="enter"
+        >
           ENTER
         </li>
       </ul>
       <ul className="row-3">
-        <li className="pinky w-32" id="left-shift">
+        <li
+          className="pinky w-32"
+          id="left-shift"
+        >
           SHIFT
         </li>
-        <li className="pinky" id="Z">
+        <li
+          className="pinky"
+          id="Z"
+        >
           Z
         </li>
-        <li className="ring" id="X">
+        <li
+          className="ring"
+          id="X"
+        >
           X
         </li>
-        <li className="middle" id="C">
+        <li
+          className="middle"
+          id="C"
+        >
           C
         </li>
-        <li className="pointer1st" id="V">
+        <li
+          className="pointer1st"
+          id="V"
+        >
           V
         </li>
-        <li className="pointer2nd" id="B">
+        <li
+          className="pointer2nd"
+          id="B"
+        >
           B
         </li>
-        <li className="pointer2nd" id="N">
+        <li
+          className="pointer2nd"
+          id="N"
+        >
           N
         </li>
-        <li className="pointer1st" id="M">
+        <li
+          className="pointer1st"
+          id="M"
+        >
           M
         </li>
         <li className="middle">,</li>
         <li className="ring">.</li>
         <li className="pinky">;</li>
-        <li className="pinky w-32" id="right-shift">
+        <li
+          className="pinky w-32"
+          id="right-shift"
+        >
           SHIFT
         </li>
       </ul>
