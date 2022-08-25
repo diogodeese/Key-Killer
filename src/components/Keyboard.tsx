@@ -48,7 +48,7 @@ function selectRandomKey() {
 function keyboard() {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const timer = 1;
+  const timer = 1.5;
   let time = timer * 60;
 
   function updateTimer() {
@@ -64,6 +64,11 @@ function keyboard() {
       seconds.toString().padStart(2, '0');
 
     time--;
+
+    if (time <= 0) {
+      endGame();
+      return;
+    }
   }
 
   setInterval(() => {
@@ -73,6 +78,11 @@ function keyboard() {
   function startGame() {
     selectRandomKey();
     setIsPlaying(true);
+  }
+
+  function endGame() {
+    document.querySelector('.selected')?.classList.remove('selected');
+    setIsPlaying(false);
   }
 
   useEffect(() => {
@@ -108,8 +118,13 @@ function keyboard() {
   return (
     <div>
       {isPlaying && (
-        <div>
-          <span id="timer">00:00</span>
+        <div className="flex justify-center items-center pb-8">
+          <span
+            className="timer"
+            id="timer"
+          >
+            00:00
+          </span>
         </div>
       )}
 
@@ -391,14 +406,14 @@ function keyboard() {
           </li>
         </ul>
       </div>
-      <div>
+      <div className="flex justify-center items-center pt-8">
         <button
-          className="px-4 py-2 border rounded"
+          className="start-button"
           onClick={() => {
             startGame();
           }}
         >
-          Start
+          Start Game
         </button>
       </div>
     </div>
