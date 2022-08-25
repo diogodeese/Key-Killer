@@ -48,6 +48,28 @@ function selectRandomKey() {
 function keyboard() {
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const timer = 1;
+  let time = timer * 60;
+
+  function updateTimer() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    const timerSpan = document.getElementById('timer');
+
+    if (!timerSpan) return;
+    timerSpan.innerText =
+      minutes.toString().padStart(2, '0') +
+      ':' +
+      seconds.toString().padStart(2, '0');
+
+    time--;
+  }
+
+  setInterval(() => {
+    updateTimer();
+  }, 1000);
+
   function startGame() {
     selectRandomKey();
     setIsPlaying(true);
@@ -87,7 +109,7 @@ function keyboard() {
     <div>
       {isPlaying && (
         <div>
-          <span>00:00</span>
+          <span id="timer">00:00</span>
         </div>
       )}
 
