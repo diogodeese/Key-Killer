@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const keys = [
   'A',
@@ -29,16 +29,15 @@ const keys = [
   'Z',
 ];
 
+function getRandomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function keyboard() {
-  const keyRef = useRef<HTMLLIElement>(null);
-
-  function getRandomNumber(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
   function selectRandomKey() {
-    const random = keys[getRandomNumber(0, keys.length - 1)];
-    const key = document.getElementById(random);
+    const randomKey = keys[getRandomNumber(0, keys.length - 1)];
+    const key = document.getElementById(randomKey);
+
     if (key) {
       key.classList.add('selected');
     } else {
@@ -48,6 +47,35 @@ function keyboard() {
 
   useEffect(() => {
     selectRandomKey();
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      e.preventDefault();
+
+      // Pressed Key
+      const pressedKeyElement = document.getElementById(e.key.toUpperCase());
+      const pressedKey = e.key;
+
+      // Current Key
+      const currentKeyElement = document.querySelector('.selected');
+      const currentKey = currentKeyElement?.textContent?.toLowerCase();
+
+      // Key pressing animation
+      pressedKeyElement?.classList.add('hit');
+      pressedKeyElement?.addEventListener('animationend', () => {
+        pressedKeyElement?.classList.remove('hit');
+      });
+
+      if (pressedKey === currentKey) {
+        currentKeyElement?.classList.remove('selected');
+        selectRandomKey();
+      }
+    };
+
+    document.addEventListener('keypress', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress);
+    };
   }, []);
 
   return (
@@ -138,49 +166,42 @@ function keyboard() {
         <li
           className="pinky"
           id="Q"
-          ref={keyRef}
         >
           Q
         </li>
         <li
           className="ring"
           id="W"
-          ref={keyRef}
         >
           W
         </li>
         <li
           className="middle"
           id="E"
-          ref={keyRef}
         >
           E
         </li>
         <li
           className="pointer1st"
           id="R"
-          ref={keyRef}
         >
           R
         </li>
         <li
           className="pointer2nd"
           id="T"
-          ref={keyRef}
         >
           T
         </li>
         <li
           className="pointer2nd"
           id="Y"
-          ref={keyRef}
         >
           Y
         </li>
         <li
           className="pointer1st"
           id="U"
-          ref={keyRef}
         >
           U
         </li>
