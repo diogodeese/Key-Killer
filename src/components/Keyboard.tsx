@@ -46,10 +46,9 @@ function selectRandomKey() {
 }
 
 function keyboard() {
+  const timer = 0.1;
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const timer = 1.5;
-  let time = timer * 60;
+  const [time, setTime] = useState(timer * 60);
 
   function updateTimer() {
     let minutes = Math.floor(time / 60);
@@ -57,21 +56,22 @@ function keyboard() {
 
     const timerSpan = document.getElementById('timer');
 
-    if (!timerSpan) return;
-    timerSpan.innerText =
-      minutes.toString().padStart(2, '0') +
-      ':' +
-      seconds.toString().padStart(2, '0');
-
-    time--;
+    if (timerSpan) {
+      timerSpan.innerText =
+        minutes.toString().padStart(2, '0') +
+        ':' +
+        seconds.toString().padStart(2, '0');
+    }
 
     if (time <= 0) {
       endGame();
       return;
     }
+
+    setTime(time - 1);
   }
 
-  setInterval(() => {
+  const interval = setInterval(() => {
     updateTimer();
   }, 1000);
 
@@ -83,6 +83,7 @@ function keyboard() {
   function endGame() {
     document.querySelector('.selected')?.classList.remove('selected');
     setIsPlaying(false);
+    clearInterval(interval);
   }
 
   useEffect(() => {
