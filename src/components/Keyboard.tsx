@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const keys = [
   'A',
@@ -46,9 +46,18 @@ function selectRandomKey() {
 }
 
 function keyboard() {
-  const timer = 0.1;
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [time, setTime] = useState(timer * 60);
+  let correctKeys = 0;
+  let wrongKeys = 0;
+  const intervalRef = useRef(0);
+  const timer = 0.2;
+  let time = timer * 60;
+
+  // Timer Interval
+  const interval = () => {
+    intervalRef.current = setInterval(() => {
+      updateTimer();
+    }, 1000);
+  };
 
   function updateTimer() {
     let minutes = Math.floor(time / 60);
@@ -64,26 +73,24 @@ function keyboard() {
     }
 
     if (time <= 0) {
+      clearInterval(intervalRef.current);
       endGame();
       return;
     }
 
-    setTime(time - 1);
+    time--;
   }
-
-  const interval = setInterval(() => {
-    updateTimer();
-  }, 1000);
 
   function startGame() {
     selectRandomKey();
-    setIsPlaying(true);
+    interval();
   }
 
   function endGame() {
     document.querySelector('.selected')?.classList.remove('selected');
-    setIsPlaying(false);
-    clearInterval(interval);
+    time = timer * 60;
+    console.log('Correct Keys: ' + correctKeys);
+    console.log('Wrong Keys: ' + wrongKeys);
   }
 
   useEffect(() => {
@@ -106,28 +113,32 @@ function keyboard() {
 
       if (pressedKey === currentKey) {
         selectRandomKey();
+        correctKeys++;
+      } else if (pressedKey !== currentKey) {
+        wrongKeys++;
       }
     };
 
     document.addEventListener('keypress', handleKeyPress);
 
+    const intervalId = intervalRef.current;
+
     return () => {
+      clearInterval(intervalId);
       document.removeEventListener('keypress', handleKeyPress);
     };
   }, []);
 
   return (
     <div>
-      {isPlaying && (
-        <div className="flex justify-center items-center pb-8">
-          <span
-            className="timer"
-            id="timer"
-          >
-            00:00
-          </span>
-        </div>
-      )}
+      <div className="flex justify-center items-center pb-8">
+        <span
+          className="timer"
+          id="timer"
+        >
+          00:00
+        </span>
+      </div>
 
       <div className="flex flex-col border-slate-300 border-2 rounded p-2">
         <ul className="row-0">
