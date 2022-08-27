@@ -91,6 +91,8 @@ function keyboard() {
     time = timer * 60;
     console.log('Correct Keys: ' + correctKeys);
     console.log('Wrong Keys: ' + wrongKeys);
+    correctKeys = 0;
+    wrongKeys = 0;
   }
 
   useEffect(() => {
