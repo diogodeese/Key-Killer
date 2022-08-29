@@ -2,6 +2,12 @@ import { useEffect, useRef } from 'react';
 import { keys, timer } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
 
+// Defining Variables
+let isPlaying: boolean = false;
+let correctKeys: number = 0;
+let wrongKeys: number = 0;
+let time: number = timer * 60;
+
 function getRandomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -20,10 +26,6 @@ function selectRandomKey() {
 
 function Game() {
   const intervalRef = useRef(0);
-  let isPlaying: boolean = false;
-  let correctKeys: number = 0;
-  let wrongKeys: number = 0;
-  let time: number = timer * 60;
 
   // Timer Interval
   const interval = () => {
@@ -46,7 +48,6 @@ function Game() {
     }
 
     if (time <= 0) {
-      clearInterval(intervalRef.current);
       endGame();
       return;
     }
@@ -61,6 +62,7 @@ function Game() {
   }
 
   function endGame() {
+    clearInterval(intervalRef.current);
     document.querySelector('.selected')?.classList.remove('selected');
     time = timer * 60;
     console.log('Correct Keys: ' + correctKeys);
