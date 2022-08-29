@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const keys = [
   'A',
@@ -46,6 +46,7 @@ function selectRandomKey() {
 }
 
 function keyboard() {
+  const [isPlaying, setIsPlaying] = useState(false);
   let correctKeys = 0;
   let wrongKeys = 0;
   const intervalRef = useRef(0);
@@ -82,8 +83,9 @@ function keyboard() {
   }
 
   function startGame() {
-    selectRandomKey();
     interval();
+    selectRandomKey();
+    setIsPlaying(true);
   }
 
   function endGame() {
@@ -93,6 +95,7 @@ function keyboard() {
     console.log('Wrong Keys: ' + wrongKeys);
     correctKeys = 0;
     wrongKeys = 0;
+    setIsPlaying(false);
   }
 
   useEffect(() => {
@@ -426,6 +429,7 @@ function keyboard() {
           onClick={() => {
             startGame();
           }}
+          disabled={isPlaying}
         >
           Start Game
         </button>
