@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const keys = [
   'A',
@@ -46,12 +46,12 @@ function selectRandomKey() {
 }
 
 function keyboard() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  let correctKeys = 0;
-  let wrongKeys = 0;
   const intervalRef = useRef(0);
-  const timer = 0.2;
-  let time = timer * 60;
+  let isPlaying: boolean = false;
+  let correctKeys: number = 0;
+  let wrongKeys: number = 0;
+  const timer: number = 0.2;
+  let time: number = timer * 60;
 
   // Timer Interval
   const interval = () => {
@@ -85,7 +85,7 @@ function keyboard() {
   function startGame() {
     interval();
     selectRandomKey();
-    setIsPlaying(true);
+    isPlaying = true;
   }
 
   function endGame() {
@@ -95,7 +95,7 @@ function keyboard() {
     console.log('Wrong Keys: ' + wrongKeys);
     correctKeys = 0;
     wrongKeys = 0;
-    setIsPlaying(false);
+    isPlaying = false;
   }
 
   useEffect(() => {
