@@ -1,10 +1,11 @@
-import Keyboard from './components/Keyboard';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from './Router';
 
 function App() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-slate-600">
-      <Keyboard />
-    </div>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 }
 
