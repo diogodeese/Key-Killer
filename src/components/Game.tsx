@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import { keys, timer } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
 
 // Defining Variables
-let isPlaying: boolean = false;
 let correctKeys: number = 0;
 let wrongKeys: number = 0;
 let time: number = timer * 60;
@@ -39,6 +39,9 @@ function setTimer() {
 
 function Game() {
   const intervalRef = useRef(0);
+  const [finalCorrectKeys, setFinalCorrectKeys] = useState(0);
+  const [finalWrongKeys, setFinalWrongKeys] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // Timer Interval
   const interval = () => {
@@ -61,18 +64,26 @@ function Game() {
   function startGame() {
     interval();
     selectRandomKey();
-    isPlaying = true;
+    setIsPlaying(true);
   }
 
   function endGame() {
+    // Clear Interval
     clearInterval(intervalRef.current);
-    document.querySelector('.selected')?.classList.remove('selected');
     time = timer * 60;
-    console.log('Correct Keys: ' + correctKeys);
-    console.log('Wrong Keys: ' + wrongKeys);
+
+    // Score Screen
+    setFinalCorrectKeys(correctKeys);
+    setFinalWrongKeys(wrongKeys);
+
+    const scoreTrigger = document.getElementById('scoreScreen');
+    scoreTrigger?.click();
+
+    // Reset Scores
+    document.querySelector('.selected')?.classList.remove('selected');
     correctKeys = 0;
     wrongKeys = 0;
-    isPlaying = false;
+    setIsPlaying(false);
     setTimeout(() => {
       setTimer();
     }, 2000);
@@ -121,6 +132,27 @@ function Game() {
 
   return (
     <div className="pb-40 noselect">
+      <Dialog.Root>
+        <Dialog.Trigger id="scoreScreen" />
+        <Dialog.Portal>
+          <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] min-w-[40%] min-h-[65%] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-12 py-12 shadow-2xl">
+            <Dialog.Title className="text-2xl font-bold text-white">
+              Here's your score!
+            </Dialog.Title>
+            <Dialog.Description className="text-md text-gray-700">
+              Correct Keys: <span id="correctKeys">{finalCorrectKeys}</span>
+              Wrong Keys: <span id="wrongKeys">{finalWrongKeys}</span>
+            </Dialog.Description>
+            <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
+              <button className="button">Share Score</button>
+              <Dialog.Close asChild>
+                <button className="button">Close</button>
+              </Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+
       <div className="flex justify-center items-center pb-8">
         <span
           className="timer"
@@ -132,9 +164,9 @@ function Game() {
 
       <Keyboard />
 
-      <div className="flex justify-center items-center pt-8">
+      <div className="flex justify-center items-center pt-8 ">
         <button
-          className="button"
+          className="button disabled:bg-slate-500"
           onClick={() => {
             startGame();
           }}
