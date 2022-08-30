@@ -24,6 +24,19 @@ function selectRandomKey() {
   }
 }
 
+function setTimer() {
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+  const timerSpan = document.getElementById('timer');
+
+  if (timerSpan) {
+    timerSpan.innerText =
+      minutes.toString().padStart(2, '0') +
+      ':' +
+      seconds.toString().padStart(2, '0');
+  }
+}
+
 function Game() {
   const intervalRef = useRef(0);
 
@@ -35,17 +48,7 @@ function Game() {
   };
 
   function updateTimer() {
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-
-    const timerSpan = document.getElementById('timer');
-
-    if (timerSpan) {
-      timerSpan.innerText =
-        minutes.toString().padStart(2, '0') +
-        ':' +
-        seconds.toString().padStart(2, '0');
-    }
+    setTimer();
 
     if (time <= 0) {
       endGame();
@@ -70,9 +73,16 @@ function Game() {
     correctKeys = 0;
     wrongKeys = 0;
     isPlaying = false;
+    setTimeout(() => {
+      setTimer();
+    }, 2000);
   }
 
   useEffect(() => {
+    if (!isPlaying) {
+      setTimer();
+    }
+
     const handleKeyPress = (e: KeyboardEvent) => {
       e.preventDefault();
 
