@@ -30,7 +30,7 @@ function GamePage() {
           <Game />
         </>
       ) : (
-        <span className="text-center text-base text-white">
+        <span className="text-center text-base text-white mb-4 w-[75%]">
           Key Killer is only playable on a computer with a keyboard
         </span>
       )}
