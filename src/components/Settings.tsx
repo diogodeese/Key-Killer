@@ -1,9 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { timer } from '../settings/settings';
 
 const settingsSections = ['Game', 'Themes', 'Account'];
 
 function Game() {
-  return <div className="w-[50%] text-center px-12 py-6">Game Settings</div>;
+  const timerOptions = [0.5, 1, 1.5];
+  const [index, setIndex] = useState(timerOptions.indexOf(timer));
+
+  function changeTimer() {
+    if (timerOptions.length - 1 === index) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
+  }
+
+  useEffect(() => {
+    function setTimer() {
+      let time = timerOptions[index] * 60;
+      let minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      const timerSpan = document.getElementById('timer');
+
+      if (timerSpan) {
+        timerSpan.innerText =
+          minutes.toString().padStart(2, '0') +
+          ':' +
+          seconds.toString().padStart(2, '0');
+      }
+    }
+
+    setTimer();
+  }, [index]);
+
+  return (
+    <div className="w-[50%] text-center px-12 py-6">
+      <button
+        className="button"
+        onClick={changeTimer}
+      >
+        Timer
+      </button>
+      <span
+        className="ml-12 text-xl"
+        id="timer"
+      >
+        {timerOptions[index]}
+      </span>
+    </div>
+  );
 }
 
 function Themes() {
