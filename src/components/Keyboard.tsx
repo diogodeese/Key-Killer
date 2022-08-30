@@ -1,4 +1,4 @@
-export default function Keyboard() {
+function Keyboard() {
   return (
     <div className="flex flex-col border-slate-300 border-2 rounded p-2">
       <ul className="row-0">
@@ -280,3 +280,5 @@ export default function Keyboard() {
     </div>
   );
 }
+
+export default Keyboard;
