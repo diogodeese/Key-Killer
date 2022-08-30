@@ -1,7 +1,7 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import GamePage from './pages/GamePage';
+import SettingsPage from './pages/SettingsPage';
 
 import Keyboard from './components/Keyboard';
 
@@ -11,6 +11,10 @@ export function Router() {
       <Route
         path="/"
         element={<GamePage />}
+      />
+      <Route
+        path="settings"
+        element={<SettingsPage />}
       />
       <Route
         path="*"
