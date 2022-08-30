@@ -49,7 +49,7 @@ function Nav() {
       </div>
       <div className="w-1/2 mr-[10%] text-right space-x-4">
         <button
-          className="button"
+          className="button correct"
           onClick={() => {
             navigate('/login');
           }}
