@@ -30,6 +30,10 @@
   box-shadow: -3px 4px 0 #333;
 }
 
+.button:active {
+  box-shadow: inset -4px 4px 0 #222;
+}
+
 ul {
   display: flex;
   list-style: none;
