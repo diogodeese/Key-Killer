@@ -1,5 +1,4 @@
 import { AiFillTrophy, AiFillSetting, AiFillHome } from 'react-icons/ai';
-import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Nav() {
@@ -28,9 +27,6 @@ function Nav() {
             <AiFillSetting className="text-2xl" />
           </button>
         )}
-        <button className="button">
-          <MdOutlineLightMode className="text-2xl" />
-        </button>
         {location.pathname === '/ranking' ? (
           <button
             className="button"
