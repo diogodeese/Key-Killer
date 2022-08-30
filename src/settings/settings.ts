@@ -27,4 +27,4 @@ export const keys: string[] = [
   'Z',
 ];
 
-export const timer: number = 0.2;
+export const timer: number = 0.5;
