@@ -139,12 +139,44 @@ function Game() {
             <Dialog.Title className="text-2xl font-bold text-white">
               Here's your score!
             </Dialog.Title>
-            <Dialog.Description className="text-md text-gray-700">
-              Correct Keys: <span id="correctKeys">{finalCorrectKeys}</span>
-              Wrong Keys: <span id="wrongKeys">{finalWrongKeys}</span>
+            <Dialog.Description className="text-lg text-gray-300 mt-4">
+              During the game you have pressed{' '}
+              <span className="text-green-300">
+                <span id="correctKeys">{finalCorrectKeys}</span>{' '}
+                {finalCorrectKeys > 1 ? <>Correct keys</> : <>Correct key</>}
+              </span>{' '}
+              and{' '}
+              <span className="text-red-300">
+                <span id="wrongKeys">{finalWrongKeys}</span>{' '}
+                {finalWrongKeys > 1 ? <>Wrong keys</> : <>Wrong key</>}
+              </span>
+              .
             </Dialog.Description>
             <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
-              <button className="button">Share Score</button>
+              <Dialog.Root>
+                <Dialog.Trigger>
+                  <button className="button">Share Score</button>
+                </Dialog.Trigger>
+                <Dialog.Portal>
+                  <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] w-[20%] h-[25%] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-8 py-6 shadow-2xl">
+                    <Dialog.Title className="text-2xl font-bold text-white">
+                      Sharing your score!
+                    </Dialog.Title>
+                    <Dialog.Description className="text-lg text-gray-300 mt-4">
+                      By sharing your score you delete previous scores that
+                      you've shared, so that only 1 score per person can be on
+                      the ranking table.
+                    </Dialog.Description>
+                    <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
+                      <Dialog.Close asChild>
+                        <button className="button">Cancel</button>
+                      </Dialog.Close>
+                      <button className="button">Confirm</button>
+                    </div>
+                  </Dialog.Content>
+                </Dialog.Portal>
+              </Dialog.Root>
+
               <Dialog.Close asChild>
                 <button className="button">Close</button>
               </Dialog.Close>
