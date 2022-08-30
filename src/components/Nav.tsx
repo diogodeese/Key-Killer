@@ -1,29 +1,38 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { AiFillTrophy, AiFillSetting } from 'react-icons/ai';
+import { AiFillTrophy, AiFillSetting, AiFillHome } from 'react-icons/ai';
+import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Nav() {
+  let navigate = useNavigate();
+  let location = useLocation();
+
   return (
     <div className="w-screen flex">
       <div className="w-1/2 ml-[10%] text-left">
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger className="button">
+        {location.pathname === '/' ? (
+          <button
+            className="button"
+            onClick={() => {
+              navigate('/settings');
+            }}
+          >
             <AiFillSetting className="text-2xl" />
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Portal>
-            <DropdownMenu.Content
-              loop={true}
-              sideOffset={8}
-              className="bg-slate-300 w-44 rounded py-2 px-3 shadow-lg"
-            >
-              <DropdownMenu.Item className="border-b-[1px] border-slate-400 py-1">
-                Game Settings
-              </DropdownMenu.Item>
-              <DropdownMenu.Item className="py-1">Themes</DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Portal>
-        </DropdownMenu.Root>
+          </button>
+        ) : (
+          <button
+            className="button"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            <AiFillHome className="text-2xl" />
+          </button>
+        )}
       </div>
-      <div className="w-1/2 mr-[10%] text-right">
+      <div className="w-1/2 mr-[10%] text-right space-x-4">
+        <button className="button">
+          <MdOutlineLightMode className="text-2xl" />
+        </button>
         <button className="button">
           <AiFillTrophy className="text-2xl" />
         </button>
