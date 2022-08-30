@@ -109,7 +109,7 @@ function Game() {
   }, []);
 
   return (
-    <div>
+    <div className="pb-40">
       <div className="flex justify-center items-center pb-8">
         <span
           className="timer"
