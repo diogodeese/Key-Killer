@@ -123,7 +123,7 @@ function Game() {
 
       <div className="flex justify-center items-center pt-8">
         <button
-          className="start-button"
+          className="button"
           onClick={() => {
             startGame();
           }}
