@@ -56,7 +56,11 @@ function Themes() {
 }
 
 function Account() {
-  return <div className="w-[50%] text-center px-12 py-6">Account Settings</div>;
+  return (
+    <div className="w-[50%] text-center px-12 py-6">
+      <button className="button">Logout</button>
+    </div>
+  );
 }
 
 function Settings() {
