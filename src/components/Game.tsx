@@ -88,7 +88,7 @@ function Game() {
 
       // Pressed Key
       const pressedKeyElement = document.getElementById(e.key.toUpperCase());
-      const pressedKey = e.key;
+      const pressedKey = e.key.toLowerCase();
 
       // Current Key
       const currentKeyElement = document.querySelector('.selected');
@@ -109,6 +109,7 @@ function Game() {
     };
 
     document.addEventListener('keypress', handleKeyPress);
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
 
     const intervalId = intervalRef.current;
 
@@ -119,7 +120,7 @@ function Game() {
   }, []);
 
   return (
-    <div className="pb-40">
+    <div className="pb-40 noselect">
       <div className="flex justify-center items-center pb-8">
         <span
           className="timer"
