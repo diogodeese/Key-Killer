@@ -13,10 +13,12 @@ function Nav() {
             <DropdownMenu.Content
               loop={true}
               sideOffset={8}
-              className="bg-slate-200 w-44 rounded p-2"
+              className="bg-slate-300 w-44 rounded py-2 px-3 shadow-lg"
             >
-              <DropdownMenu.Item>Game Settings</DropdownMenu.Item>
-              <DropdownMenu.Item>Themes</DropdownMenu.Item>
+              <DropdownMenu.Item className="border-b-[1px] border-slate-400 py-1">
+                Game Settings
+              </DropdownMenu.Item>
+              <DropdownMenu.Item className="py-1">Themes</DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
