@@ -34,30 +34,37 @@ function Game() {
   }, [index]);
 
   return (
-    <div className="w-[50%] text-center px-12 py-6">
-      <button
-        className="button"
-        onClick={changeTimer}
-      >
-        Timer
-      </button>
-      <span
-        className="ml-12 text-xl"
-        id="timer"
-      >
-        {timerOptions[index]}
-      </span>
+    <div className="flex flex-col w-[50%] text-center px-12 py-6 space-y-8">
+      <div>
+        <button
+          className="button"
+          onClick={changeTimer}
+        >
+          Timer
+        </button>
+        <span
+          className="ml-12 text-xl"
+          id="timer"
+        >
+          {timerOptions[index]}
+        </span>
+      </div>
     </div>
   );
 }
 
 function Themes() {
-  return <div className="w-[50%] text-center px-12 py-6">Theme Settings</div>;
+  return (
+    <div className="flex flex-col w-[50%] text-center px-12 py-6 space-y-8">
+      Theme Settings
+    </div>
+  );
 }
 
 function Account() {
   return (
-    <div className="w-[50%] text-center px-12 py-6">
+    <div className="flex flex-col w-[50%] text-center px-12 py-6 space-y-8">
+      <button className="button">Clear Scores</button>
       <button className="button">Logout</button>
     </div>
   );
