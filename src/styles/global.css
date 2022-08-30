@@ -8,6 +8,12 @@
   box-sizing: border-box;
 }
 
+.settings-title {
+  font-size: 36px;
+  font-family: 'Oxanium', cursive;
+  color: white;
+}
+
 .timer {
   color: white;
   font-family: 'Oxanium', cursive;
@@ -41,6 +47,33 @@
   box-shadow: inset -4px 4px 0 #222;
 }
 
+.correct {
+  background-color: #22c55e;
+}
+
+.correct:hover {
+  background-color: #15803d;
+  transition: ease 0.2s;
+}
+
+.warning {
+  background-color: #f59e0b;
+}
+
+.warning:hover {
+  background-color: #b45309;
+  transition: ease 0.2s;
+}
+
+.danger {
+  background-color: #ef4444;
+}
+
+.danger:hover {
+  background-color: #b91c1c;
+  transition: ease 0.2s;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -48,6 +81,10 @@
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+p {
+  font-family: 'Oxanium', cursive;
 }
 
 ul {
