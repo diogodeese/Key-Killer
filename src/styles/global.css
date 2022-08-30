@@ -25,12 +25,19 @@
   font-size: 20px;
   font-weight: 500;
   color: white;
+  background-color: #475569;
   border: solid 2px rgb(203 213 225);
   border-radius: 4px;
   box-shadow: -3px 4px 0 #333;
 }
 
+.button:hover {
+  background-color: #334155;
+  transition: ease 0.2s;
+}
+
 .button:active {
+  background-color: #1e293b;
   box-shadow: inset -4px 4px 0 #222;
 }
 
