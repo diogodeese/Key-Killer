@@ -3,8 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import GamePage from './pages/GamePage';
 import SettingsPage from './pages/SettingsPage';
 import RankingPage from './pages/RankingPage';
-
-import Keyboard from './components/Keyboard';
+import NotFoundPage from './pages/NotFoundPage';
 
 export function Router() {
   return (
@@ -23,7 +22,7 @@ export function Router() {
       />
       <Route
         path="*"
-        element={<Keyboard />}
+        element={<NotFoundPage />}
       />
     </Routes>
   );
