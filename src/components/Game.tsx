@@ -3,6 +3,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { keys, timer } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
 
+import { getItem } from 'local-data-storage';
+
 // Defining Variables
 let correctKeys: number = 0;
 let wrongKeys: number = 0;
@@ -92,6 +94,9 @@ function Game() {
 
   useEffect(() => {
     if (!isPlaying) {
+      if (getItem('timer')?.value !== timer)
+        time = getItem('timer')?.value * 60;
+
       setTimer();
     }
 
