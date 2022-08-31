@@ -72,7 +72,7 @@ function Game() {
 
   function endGame() {
     // Clear Interval
-    clearInterval(intervalRef.current);
+    clearInterval(intervalId);
 
     if (getItem('timer')?.value) {
       time = getItem('timer')?.value * 60;
