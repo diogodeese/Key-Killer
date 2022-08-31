@@ -147,7 +147,7 @@ function Game() {
       <Dialog.Root>
         <Dialog.Trigger id="scoreScreen" />
         <Dialog.Portal>
-          <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] min-w-[40%] min-h-[65%] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-12 py-12 shadow-2xl">
+          <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] w-[40%] h-[65%] min-w-[560px] min-h-[660px] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-12 py-12 shadow-2xl">
             <Dialog.Title className="text-2xl font-bold text-white">
               Here's your score!
             </Dialog.Title>
@@ -170,20 +170,24 @@ function Game() {
                   <button className="button">Share Score</button>
                 </Dialog.Trigger>
                 <Dialog.Portal>
-                  <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] w-[20%] h-[25%] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-8 py-6 shadow-2xl">
+                  <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] w-[20%] h-[25%] min-w-[520px] min-h-[300px] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-8 py-6 shadow-2xl">
                     <Dialog.Title className="text-2xl font-bold text-white">
                       Sharing your score!
                     </Dialog.Title>
                     <Dialog.Description className="text-lg text-gray-300 mt-4">
-                      By sharing your score you delete previous scores that
-                      you've shared, so that only 1 score per person can be on
-                      the ranking table.
+                      By sharing your score you{' '}
+                      <span className="text-red-300">
+                        delete previous scores
+                      </span>{' '}
+                      that you've shared, so that only{' '}
+                      <span className="text-green-300">1 score per person</span>{' '}
+                      can be on the ranking table.
                     </Dialog.Description>
                     <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
                       <Dialog.Close asChild>
-                        <button className="button">Cancel</button>
+                        <button className="button danger">Cancel</button>
                       </Dialog.Close>
-                      <button className="button">Confirm</button>
+                      <button className="button correct">Confirm</button>
                     </div>
                   </Dialog.Content>
                 </Dialog.Portal>
