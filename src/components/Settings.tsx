@@ -57,7 +57,7 @@ function Game() {
 
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
-      <h2 className="settings-title">Game Settings</h2>
+      <h2 className="title">Game Settings</h2>
       <div className="flex flex-col space-y-4">
         <p className="text-lg text-slate-200">Change the game timer</p>
         <div className="flex space-x-4">
@@ -94,7 +94,7 @@ function Game() {
 function Themes() {
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
-      <h2 className="settings-title">Themes</h2>
+      <h2 className="title">Themes</h2>
     </div>
   );
 }
@@ -102,7 +102,7 @@ function Themes() {
 function Account() {
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
-      <h2 className="settings-title">Account Settings</h2>
+      <h2 className="title">Account Settings</h2>
 
       <div className="flex flex-col text-start space-y-3">
         <p className="text-lg text-slate-200">
