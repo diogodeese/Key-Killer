@@ -1,18 +1,35 @@
 import { useEffect, useState } from 'react';
 import { timer } from '../settings/settings';
 
+import { setItem, getItem } from 'local-data-storage';
+
 const settingsSections = ['Game', 'Themes', 'Account'];
 
 function Game() {
   const timerOptions = [0.5, 1, 1.5];
   const [index, setIndex] = useState(timerOptions.indexOf(timer));
 
-  function changeTimer() {
+  function incrementTimer() {
     if (timerOptions.length - 1 === index) {
       setIndex(0);
     } else {
       setIndex(index + 1);
     }
+  }
+
+  function decrementTimer() {
+    if (index === 0) {
+      setIndex(timerOptions.length - 1);
+    } else {
+      setIndex(index - 1);
+    }
+  }
+
+  function saveTimer() {
+    let timer = timerOptions[index];
+
+    setItem('timer', { value: timer }, true);
+    location.reload();
   }
 
   useEffect(() => {
@@ -36,19 +53,34 @@ function Game() {
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
       <h2 className="settings-title">Game Settings</h2>
-      <div>
+      <div className="flex flex-col space-y-4">
+        <p className="text-lg text-slate-200">Change the game timer</p>
+        <div className="flex space-x-4">
+          <button
+            className="button"
+            onClick={decrementTimer}
+          >
+            &#60;
+          </button>
+          <p
+            className="text-4xl text-slate-200 mt-1"
+            id="timer"
+          >
+            {timerOptions[index]}
+          </p>
+          <button
+            className="button"
+            onClick={incrementTimer}
+          >
+            &#62;
+          </button>
+        </div>
         <button
-          className="button"
-          onClick={changeTimer}
+          className="button correct w-56"
+          onClick={saveTimer}
         >
-          Timer
+          Set Timer
         </button>
-        <span
-          className="ml-12 text-xl"
-          id="timer"
-        >
-          {timerOptions[index]}
-        </span>
       </div>
     </div>
   );

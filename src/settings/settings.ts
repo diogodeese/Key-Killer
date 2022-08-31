@@ -1,3 +1,5 @@
+import { getItem } from 'local-data-storage';
+
 export const keys: string[] = [
   'A',
   'B',
@@ -27,4 +29,13 @@ export const keys: string[] = [
   'Z',
 ];
 
-export const timer: 0.5 | 1 | 1.5 = 0.5;
+let timerStorage = getItem('timer');
+let value;
+
+if (timerStorage) {
+  value = timerStorage?.value;
+} else {
+  value = 0.5;
+}
+
+export const timer: number = value;
