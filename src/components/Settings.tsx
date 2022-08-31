@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { setItem, getItem } from 'local-data-storage';
+import { timerOptions } from '../settings/settings';
 
 const settingsSections = ['Game', 'Themes', 'Account'];
 
 function Game() {
-  const timerOptions = [0.5, 1, 1.5];
   const [index, setIndex] = useState(
     timerOptions.indexOf(getItem('timer')?.value)
   );

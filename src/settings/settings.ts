@@ -26,3 +26,5 @@ export const keys: string[] = [
   'Y',
   'Z',
 ];
+
+export const timerOptions = [0.25, 0.5, 1, 1.5];
