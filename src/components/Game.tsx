@@ -94,6 +94,8 @@ function Game() {
 
   useEffect(() => {
     if (!isPlaying) {
+      console.log(timer);
+      console.log(getItem('timer')?.value);
       if (getItem('timer')?.value !== timer)
         time = getItem('timer')?.value * 60;
 
