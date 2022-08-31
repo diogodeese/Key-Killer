@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { keys, timer } from '../settings/settings.js';
+import { keys } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
 
 import { getItem } from 'local-data-storage';
@@ -8,7 +8,7 @@ import { getItem } from 'local-data-storage';
 // Defining Variables
 let correctKeys: number = 0;
 let wrongKeys: number = 0;
-let time: number = timer * 60;
+let time: number;
 
 function getRandomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -73,7 +73,7 @@ function Game() {
   function endGame() {
     // Clear Interval
     clearInterval(intervalRef.current);
-    time = timer * 60;
+    time = getItem('timer')?.value * 60;
 
     // Score Screen
     setFinalCorrectKeys(correctKeys);
@@ -94,11 +94,7 @@ function Game() {
 
   useEffect(() => {
     if (!isPlaying) {
-      console.log(timer);
-      console.log(getItem('timer')?.value);
-      if (getItem('timer')?.value !== timer)
-        time = getItem('timer')?.value * 60;
-
+      time = getItem('timer')?.value * 60;
       setTimer();
     }
 
