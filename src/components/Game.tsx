@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { keys, defaultTimer } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
@@ -41,7 +41,6 @@ function setTimer() {
 
 function Game() {
   let intervalId: NodeJS.Timer;
-  const intervalRef = useRef(0);
   const [finalCorrectKeys, setFinalCorrectKeys] = useState(0);
   const [finalWrongKeys, setFinalWrongKeys] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
