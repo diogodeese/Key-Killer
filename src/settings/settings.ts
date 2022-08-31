@@ -28,3 +28,4 @@ export const keys: string[] = [
 ];
 
 export const timerOptions = [0.25, 0.5, 0.75, 1, 1.5];
+export const defaultTimer = timerOptions[1];

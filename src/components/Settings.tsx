@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 import { setItem, getItem } from 'local-data-storage';
-import { timerOptions } from '../settings/settings';
+import { timerOptions, defaultTimer } from '../settings/settings';
 
 const settingsSections = ['Game', 'Themes', 'Account'];
 
 function Game() {
-  const [index, setIndex] = useState(
-    timerOptions.indexOf(getItem('timer')?.value)
-  );
+  let initialIndex;
+
+  if (getItem('timer')?.value) {
+    initialIndex = getItem('timer')?.value;
+  } else {
+    initialIndex = defaultTimer;
+  }
+
+  const [index, setIndex] = useState(timerOptions.indexOf(initialIndex));
 
   function incrementTimer() {
     if (timerOptions.length - 1 === index) {

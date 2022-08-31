@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { keys, timerOptions } from '../settings/settings.js';
+import { keys, defaultTimer } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
 
 import { getItem } from 'local-data-storage';
 
 // Defining Variables
-const defaultTimer = timerOptions[1];
 let correctKeys: number = 0;
 let wrongKeys: number = 0;
 let time: number;
