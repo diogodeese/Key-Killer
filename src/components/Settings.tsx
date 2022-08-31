@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { setItem, getItem } from 'local-data-storage';
 import { timerOptions, defaultTimer } from '../settings/settings';
+import * as RadioGroup from '@radix-ui/react-radio-group';
+
+// Themes
+import defaultTheme from '../assets/default_theme.png';
 
 const settingsSections = ['Game', 'Themes', 'Account'];
 
@@ -92,9 +96,43 @@ function Game() {
 }
 
 function Themes() {
+  const themes = [
+    defaultTheme,
+    defaultTheme,
+    defaultTheme,
+    defaultTheme,
+    defaultTheme,
+    defaultTheme,
+  ];
+
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
       <h2 className="title">Themes</h2>
+
+      <RadioGroup.Root>
+        <div className="flex flex-wrap gap-8">
+          {themes.map((theme, key) => {
+            return (
+              <div
+                key={key}
+                className="border rounded p-2"
+              >
+                <RadioGroup.Item
+                  value={theme}
+                  className="w-4 h-4 rounded-full bg-white "
+                >
+                  <RadioGroup.Indicator className="bg-white w-full h-full" />
+                </RadioGroup.Item>
+                <img
+                  src={theme}
+                  width={400}
+                  alt="default theme"
+                />
+              </div>
+            );
+          })}
+        </div>{' '}
+      </RadioGroup.Root>
     </div>
   );
 }
@@ -108,7 +146,7 @@ function Account() {
         <p className="text-lg text-slate-200">
           Clearing your score will remove you from the ranking table
         </p>
-        <button className="button warning">Clear Scores</button>
+        <button className="button warning">Clear Score</button>
       </div>
 
       <div className="flex flex-col text-start space-y-3">
