@@ -28,7 +28,6 @@ function Game() {
     let timer = timerOptions[index];
 
     setItem('timer', { value: timer }, true);
-    location.reload();
   }
 
   useEffect(() => {
