@@ -10,6 +10,14 @@ let correctKeys: number = 0;
 let wrongKeys: number = 0;
 let time: number;
 
+interface FinalScore {
+  timer: number;
+  correctKeys: number;
+  correctKeysPerSecond?: number;
+  wrongKeys: number;
+  wrongKeysPerSecond?: number;
+}
+
 function getRandomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -41,9 +49,12 @@ function setTimer() {
 
 function Game() {
   let intervalId: NodeJS.Timer;
-  const [finalCorrectKeys, setFinalCorrectKeys] = useState(0);
-  const [finalWrongKeys, setFinalWrongKeys] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [finalScore, setFinalScore] = useState<FinalScore>({
+    timer: time,
+    correctKeys: 0,
+    wrongKeys: 0,
+  });
 
   // Timer Interval
   const interval = () => {
@@ -80,8 +91,13 @@ function Game() {
     }
 
     // Score Screen
-    setFinalCorrectKeys(correctKeys);
-    setFinalWrongKeys(wrongKeys);
+    setFinalScore({
+      timer: time,
+      correctKeys: correctKeys,
+      correctKeysPerSecond: correctKeys / time,
+      wrongKeys: wrongKeys,
+      wrongKeysPerSecond: wrongKeys / time,
+    });
 
     const scoreTrigger = document.getElementById('scoreScreen');
     scoreTrigger?.click();
@@ -147,51 +163,39 @@ function Game() {
         <Dialog.Trigger id="scoreScreen" />
         <Dialog.Portal>
           <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] w-[40%] h-[65%] min-w-[560px] min-h-[660px] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-12 py-12 shadow-2xl">
-            <Dialog.Title className="text-2xl font-bold text-white">
-              Here's your score!
-            </Dialog.Title>
+            <Dialog.Title className="title">Statistics</Dialog.Title>
             <Dialog.Description className="text-lg text-gray-300 mt-4">
-              During the game you have pressed{' '}
-              <span className="text-green-300">
-                <span id="correctKeys">{finalCorrectKeys}</span>{' '}
-                {finalCorrectKeys > 1 ? <>Correct keys</> : <>Correct key</>}
-              </span>{' '}
-              and{' '}
-              <span className="text-red-300">
-                <span id="wrongKeys">{finalWrongKeys}</span>{' '}
-                {finalWrongKeys > 1 ? <>Wrong keys</> : <>Wrong key</>}
+              <span className="text-xl">
+                The game lasted for {finalScore.timer} seconds!
               </span>
-              .
+              <br />
+              <br />
+              {finalScore.correctKeys > 1 ? (
+                <>Correct keys</>
+              ) : (
+                <>Correct key</>
+              )}
+              : <span className="text-green-300">{finalScore.correctKeys}</span>{' '}
+              <br />
+              {finalScore.wrongKeys > 1 ? (
+                <>Wrong keys</>
+              ) : (
+                <>Wrong key</>
+              )}: <span className="text-red-300">{finalScore.wrongKeys}</span>
+              <br />
+              <br />
+              Correct Keys Per Second:{' '}
+              <span className="text-green-300">
+                {finalScore.correctKeysPerSecond?.toFixed(2)}
+              </span>
+              <br />
+              Wrong Keys Per Second:{' '}
+              <span className="text-red-300">
+                {finalScore.wrongKeysPerSecond?.toFixed(2)}
+              </span>
             </Dialog.Description>
-            <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
-              <Dialog.Root>
-                <Dialog.Trigger>
-                  <button className="button">Share Score</button>
-                </Dialog.Trigger>
-                <Dialog.Portal>
-                  <Dialog.Content className="border-2 rounded-xl absolute top-[50%] left-[50%] w-[20%] h-[25%] min-w-[520px] min-h-[300px] translate-y-[-50%] translate-x-[-50%] bg-slate-600 px-8 py-6 shadow-2xl">
-                    <Dialog.Title className="text-2xl font-bold text-white">
-                      Sharing your score!
-                    </Dialog.Title>
-                    <Dialog.Description className="text-lg text-gray-300 mt-4">
-                      By sharing your score you{' '}
-                      <span className="text-red-300">
-                        delete previous scores
-                      </span>{' '}
-                      that you've shared, so that only{' '}
-                      <span className="text-green-300">1 score per person</span>{' '}
-                      can be on the ranking table.
-                    </Dialog.Description>
-                    <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
-                      <Dialog.Close asChild>
-                        <button className="button danger">Cancel</button>
-                      </Dialog.Close>
-                      <button className="button correct">Confirm</button>
-                    </div>
-                  </Dialog.Content>
-                </Dialog.Portal>
-              </Dialog.Root>
 
+            <div className="flex absolute bottom-[5%] right-[5%] space-x-4">
               <Dialog.Close asChild>
                 <button className="button">Close</button>
               </Dialog.Close>
