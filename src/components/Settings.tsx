@@ -112,8 +112,8 @@ function Account() {
       </div>
 
       <div className="flex flex-col text-start space-y-3">
-        <p className="text-lg text-slate-200">Logout from your account</p>
-        <button className="button danger">Logout</button>
+        <p className="text-lg text-slate-200">Log out from your account</p>
+        <button className="button danger">Log out</button>
       </div>
     </div>
   );
