@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { timer } from '../settings/settings';
-
-import { setItem, getItem } from 'local-data-storage';
+import { setItem } from 'local-data-storage';
 
 const settingsSections = ['Game', 'Themes', 'Account'];
 
