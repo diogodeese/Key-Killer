@@ -38,6 +38,7 @@ function setTimer() {
 }
 
 function Game() {
+  let intervalId: NodeJS.Timer;
   const intervalRef = useRef(0);
   const [finalCorrectKeys, setFinalCorrectKeys] = useState(0);
   const [finalWrongKeys, setFinalWrongKeys] = useState(0);
@@ -45,7 +46,7 @@ function Game() {
 
   // Timer Interval
   const interval = () => {
-    intervalRef.current = setInterval(() => {
+    intervalId = setInterval(() => {
       updateTimer();
     }, 1000);
   };
@@ -121,8 +122,6 @@ function Game() {
 
     document.addEventListener('keypress', handleKeyPress);
     document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-    const intervalId = intervalRef.current;
 
     return () => {
       clearInterval(intervalId);
