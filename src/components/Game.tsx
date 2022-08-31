@@ -23,8 +23,14 @@ function getRandomNumber(min: number, max: number) {
 }
 
 function selectRandomKey() {
-  document.querySelector('.selected')?.classList.remove('selected');
-  const randomKey = keys[getRandomNumber(0, keys.length - 1)];
+  let lastKey = document.querySelector('.selected');
+  let randomKey = keys[getRandomNumber(0, keys.length - 1)];
+
+  while (lastKey?.textContent === randomKey) {
+    randomKey = keys[getRandomNumber(0, keys.length - 1)];
+  }
+
+  lastKey?.classList.remove('selected');
   const key = document.getElementById(randomKey);
 
   if (key) {
