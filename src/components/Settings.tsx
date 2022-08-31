@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { timer } from '../settings/settings';
-import { setItem } from 'local-data-storage';
+import { setItem, getItem } from 'local-data-storage';
 
 const settingsSections = ['Game', 'Themes', 'Account'];
 
 function Game() {
   const timerOptions = [0.5, 1, 1.5];
-  const [index, setIndex] = useState(timerOptions.indexOf(timer));
+  const [index, setIndex] = useState(
+    timerOptions.indexOf(getItem('timer')?.value)
+  );
 
   function incrementTimer() {
     if (timerOptions.length - 1 === index) {
@@ -74,7 +75,7 @@ function Game() {
           </button>
         </div>
         <button
-          className="button correct w-56"
+          className="button correct w-[220px]"
           onClick={saveTimer}
         >
           Set Timer
