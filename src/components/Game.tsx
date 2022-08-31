@@ -135,7 +135,7 @@ function Game() {
   }, []);
 
   return (
-    <div className="pb-40 noselect">
+    <div className="pb-40 no-select">
       <Dialog.Root>
         <Dialog.Trigger id="scoreScreen" />
         <Dialog.Portal>
