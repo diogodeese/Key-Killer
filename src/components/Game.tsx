@@ -220,7 +220,7 @@ function Game() {
               <br />
               Fastest Key Pressed:{' '}
               <span className="text-green-300">
-                {finalScore.fastestKeyPressed.toFixed(3)}s
+                {finalScore.fastestKeyPressed?.toFixed(3)}s
               </span>
             </Dialog.Description>
 
