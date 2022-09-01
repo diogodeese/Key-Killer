@@ -22,6 +22,7 @@ interface AuthContextValue {
   googleSignIn?: () => void;
   logOut?: () => void;
   user?: {
+    accessToken?: string;
     displayName?: string;
   };
 }

@@ -19,10 +19,10 @@ function LoginPage() {
   };
 
   useEffect(() => {
-    if (context?.user?.displayName != null) {
+    if (context?.user?.accessToken != null) {
       navigate('/');
     }
-  }, []);
+  }, [context]);
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-slate-600">

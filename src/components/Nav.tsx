@@ -8,8 +8,6 @@ function Nav() {
 
   const context = UserAuth();
 
-  console.log(context);
-
   return (
     <div className="w-screen flex">
       <div className="w-1/2 ml-[10%] text-left space-x-4">
