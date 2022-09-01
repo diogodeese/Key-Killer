@@ -125,7 +125,7 @@ function Themes() {
                 </RadioGroup.Item>
                 <img
                   src={theme}
-                  width={400}
+                  width={370}
                   alt="default theme"
                 />
               </div>
