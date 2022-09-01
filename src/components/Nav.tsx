@@ -1,9 +1,14 @@
 import { AiFillTrophy, AiFillSetting, AiFillHome } from 'react-icons/ai';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
 
 function Nav() {
   let navigate = useNavigate();
   let location = useLocation();
+
+  const context = UserAuth();
+
+  console.log(context);
 
   return (
     <div className="w-screen flex">
@@ -48,14 +53,18 @@ function Nav() {
         )}
       </div>
       <div className="w-1/2 mr-[10%] text-right space-x-4">
-        <button
-          className="button correct"
-          onClick={() => {
-            navigate('/login');
-          }}
-        >
-          Login
-        </button>
+        {!context?.user?.displayName ? (
+          <button
+            className="button correct"
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            Login
+          </button>
+        ) : (
+          <p className="title">{context?.user.displayName}</p>
+        )}
       </div>
     </div>
   );

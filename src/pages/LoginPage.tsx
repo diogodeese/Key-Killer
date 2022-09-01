@@ -1,7 +1,28 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
 
 function LoginPage() {
   const navigate = useNavigate();
+
+  const context = UserAuth();
+
+  const handleGoogleSignIn = async () => {
+    if (context?.googleSignIn) {
+      try {
+        context.googleSignIn();
+        navigate('/');
+      } catch {
+        console.error('error');
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (context?.user?.displayName != null) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-slate-600">
@@ -9,7 +30,12 @@ function LoginPage() {
         <p className="absolute top-8 text-xl">
           Log in to compete on the ranking table!
         </p>
-        Google Login Button
+        <button
+          className="button"
+          onClick={handleGoogleSignIn}
+        >
+          Google Login
+        </button>
         <button
           className="button danger absolute bottom-8 w-full"
           onClick={() => {
