@@ -6,9 +6,12 @@ import Keyboard from './Keyboard.js';
 import { getItem } from 'local-data-storage';
 
 // Defining Variables
-let correctKeys: number = 0;
-let wrongKeys: number = 0;
+let correctKeys = 0;
+let wrongKeys = 0;
 let time: number;
+let initialUnix: number;
+let finalUnix: number;
+let fastestKeyPressed: number;
 
 interface FinalScore {
   timer: number;
@@ -16,6 +19,7 @@ interface FinalScore {
   correctKeysPerSecond?: number;
   wrongKeys: number;
   wrongKeysPerSecond?: number;
+  fastestKeyPressed: number;
 }
 
 function getRandomNumber(min: number, max: number) {
@@ -38,6 +42,8 @@ function selectRandomKey() {
   } else {
     console.error('Key value is null');
   }
+
+  initialUnix = Date.now();
 }
 
 function setTimer() {
@@ -55,11 +61,13 @@ function setTimer() {
 
 function Game() {
   let intervalId: NodeJS.Timer;
+  fastestKeyPressed = time;
   const [isPlaying, setIsPlaying] = useState(false);
   const [finalScore, setFinalScore] = useState<FinalScore>({
     timer: time,
     correctKeys: 0,
     wrongKeys: 0,
+    fastestKeyPressed: fastestKeyPressed,
   });
 
   // Timer Interval
@@ -103,6 +111,7 @@ function Game() {
       correctKeysPerSecond: correctKeys / time,
       wrongKeys: wrongKeys,
       wrongKeysPerSecond: wrongKeys / time,
+      fastestKeyPressed: fastestKeyPressed,
     });
 
     const scoreTrigger = document.getElementById('scoreScreen');
@@ -112,6 +121,7 @@ function Game() {
     document.querySelector('.selected')?.classList.remove('selected');
     correctKeys = 0;
     wrongKeys = 0;
+    fastestKeyPressed = time;
     setIsPlaying(false);
     setTimeout(() => {
       setTimer();
@@ -147,6 +157,13 @@ function Game() {
       });
 
       if (pressedKey === currentKey) {
+        finalUnix = Date.now();
+        const keyTimer = (finalUnix - initialUnix) / 1000;
+
+        if (keyTimer < fastestKeyPressed) {
+          fastestKeyPressed = keyTimer;
+        }
+
         selectRandomKey();
         correctKeys++;
       } else if (pressedKey !== currentKey) {
@@ -198,6 +215,12 @@ function Game() {
               Wrong Keys Per Second:{' '}
               <span className="text-red-300">
                 {finalScore.wrongKeysPerSecond?.toFixed(2)}
+              </span>
+              <br />
+              <br />
+              Fastest Key Pressed:{' '}
+              <span className="text-green-300">
+                {finalScore.fastestKeyPressed.toFixed(3)}s
               </span>
             </Dialog.Description>
 
