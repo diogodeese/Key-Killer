@@ -128,17 +128,7 @@ function Game() {
     }, 2000);
   }
 
-  async function test(asd: string) {
-    const result = await fetch(asd)
-      .then((res) => res.json)
-      .then((data) => console.log(data));
-
-    return result;
-  }
-
   useEffect(() => {
-    test('https://geolocation-db.com/json/');
-
     if (!isPlaying) {
       if (getItem('timer')?.value) {
         time = getItem('timer')?.value * 60;
