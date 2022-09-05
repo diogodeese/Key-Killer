@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -10,6 +10,8 @@ import { getAuth } from 'firebase/auth';
 const firebaseConfig = {
   apiKey: 'AIzaSyBmbjNUvQFpl1z3xzJScOmmLcSrgoFhbtI',
   authDomain: 'key-killer.firebaseapp.com',
+  databaseURL:
+    'https://key-killer-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'key-killer',
   storageBucket: 'key-killer.appspot.com',
   messagingSenderId: '53648573084',
@@ -19,5 +21,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const Auth = getAuth(app);
+export const Database = getDatabase(app);

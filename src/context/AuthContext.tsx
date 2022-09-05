@@ -7,7 +7,6 @@ import {
 } from 'react';
 import {
   GoogleAuthProvider,
-  signInWithPopup,
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
@@ -24,6 +23,7 @@ interface AuthContextValue {
   user?: {
     accessToken?: string;
     displayName?: string;
+    uid?: string;
   };
 }
 

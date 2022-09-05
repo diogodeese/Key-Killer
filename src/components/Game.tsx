@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
 import { keys, defaultTimer } from '../settings/settings.js';
 import Keyboard from './Keyboard.js';
 
+// Utils
+import * as Dialog from '@radix-ui/react-dialog';
 import { getItem } from 'local-data-storage';
+
+// Firebase
+import { UserAuth } from '../context/AuthContext.js';
+import { Database } from '../firebase.js';
+import { set, ref, onValue } from 'firebase/database';
 
 // Defining Variables
 let correctKeys = 0;
@@ -14,6 +20,8 @@ let finalUnix: number;
 let fastestKeyPressed: number;
 
 interface FinalScore {
+  username?: string;
+  userUid?: string;
   timer: number;
   correctKeys: number;
   correctKeysPerSecond?: number;
@@ -69,6 +77,15 @@ function Game() {
     wrongKeys: 0,
     fastestKeyPressed: fastestKeyPressed,
   });
+  // Auth
+  const context = UserAuth();
+
+  // Reset Scores
+  function resetScores() {
+    correctKeys = 0;
+    wrongKeys = 0;
+    fastestKeyPressed = time;
+  }
 
   // Timer Interval
   const interval = () => {
@@ -89,6 +106,7 @@ function Game() {
   }
 
   function startGame() {
+    resetScores();
     interval();
     selectRandomKey();
     setIsPlaying(true);
@@ -104,24 +122,58 @@ function Game() {
       time = defaultTimer * 60;
     }
 
-    // Score Screen
-    setFinalScore({
-      timer: time,
-      correctKeys: correctKeys,
-      correctKeysPerSecond: correctKeys / time,
-      wrongKeys: wrongKeys,
-      wrongKeysPerSecond: wrongKeys / time,
-      fastestKeyPressed: fastestKeyPressed,
-    });
+    const score =
+      (correctKeys - wrongKeys) * 0.6 +
+      (correctKeys / time - wrongKeys / time) * 0.4;
 
+    if (context?.user?.accessToken) {
+      setFinalScore({
+        username: context.user.displayName,
+        timer: time,
+        correctKeys: correctKeys,
+        correctKeysPerSecond: correctKeys / time,
+        wrongKeys: wrongKeys,
+        wrongKeysPerSecond: wrongKeys / time,
+        fastestKeyPressed: fastestKeyPressed,
+      });
+      set(ref(Database, `ranking/${time}`), {
+        username: context.user.displayName,
+        uid: context.user.uid,
+        timer: time,
+        correctKeys: correctKeys,
+        correctKeysPerSecond: correctKeys / time,
+        wrongKeys: wrongKeys,
+        wrongKeysPerSecond: wrongKeys / time,
+        fastestKeyPressed: fastestKeyPressed,
+        score: score,
+      });
+      onValue(ref(Database), (snapshot) => {
+        const data = snapshot.val();
+        let timer = JSON.stringify(time);
+        if (data && context.user?.uid) {
+          if (
+            data.ranking[timer][context.user?.uid].score < score ||
+            !data.ranking[timer][context.user?.uid].score
+          ) {
+            console.log('asd');
+          }
+        }
+      });
+    } else {
+      setFinalScore({
+        timer: time,
+        correctKeys: correctKeys,
+        correctKeysPerSecond: correctKeys / time,
+        wrongKeys: wrongKeys,
+        wrongKeysPerSecond: wrongKeys / time,
+        fastestKeyPressed: fastestKeyPressed,
+      });
+    }
     const scoreTrigger = document.getElementById('scoreScreen');
     scoreTrigger?.click();
 
     // Reset Scores
     document.querySelector('.selected')?.classList.remove('selected');
-    correctKeys = 0;
-    wrongKeys = 0;
-    fastestKeyPressed = time;
     setIsPlaying(false);
     setTimeout(() => {
       setTimer();
