@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactNode } from 'react';
 
 // Firebase
 import { UserAuth } from '../context/AuthContext.js';
@@ -6,7 +6,11 @@ import { Database } from '../firebase.js';
 import { onValue, ref } from 'firebase/database';
 
 interface Ranking {
-  uid: {
+  username?: ReactNode;
+  correctKeys?: ReactNode;
+  wrongKeys?: ReactNode;
+  score?: ReactNode;
+  uid?: {
     correctKeys?: string;
     correctKeysPerSecond?: string;
     wrongKeys?: string;
@@ -14,11 +18,12 @@ interface Ranking {
     fastestKeyPressed?: string;
     timer?: string;
     username?: string;
+    score?: string;
   };
 }
 
 function Ranking() {
-  const [ranking, setRanking] = useState();
+  const [ranking, setRanking] = useState<Ranking[]>();
   const context = UserAuth();
 
   useEffect(() => {
@@ -29,9 +34,6 @@ function Ranking() {
   }, []);
 
   if (ranking) {
-    Object.keys(ranking).map((rank) => {
-      console.log(rank);
-    });
     return (
       <div className="w-screen flex items-center justify-center">
         <table className="min-w-[60%]">
@@ -44,7 +46,21 @@ function Ranking() {
               <th>Score</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {Object.keys(ranking)
+              .sort()
+              .map((a: any, key: number) => {
+                return (
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{ranking[a].username}</td>
+                    <td>{ranking[a].correctKeys}</td>
+                    <td>{ranking[a].wrongKeys}</td>
+                    <td>{Number(ranking[a].score).toFixed(2)}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
         </table>
       </div>
     );
