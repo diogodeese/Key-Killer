@@ -136,26 +136,25 @@ function Game() {
         wrongKeysPerSecond: wrongKeys / time,
         fastestKeyPressed: fastestKeyPressed,
       });
-      set(ref(Database, `ranking/${time}`), {
-        username: context.user.displayName,
-        uid: context.user.uid,
-        timer: time,
-        correctKeys: correctKeys,
-        correctKeysPerSecond: correctKeys / time,
-        wrongKeys: wrongKeys,
-        wrongKeysPerSecond: wrongKeys / time,
-        fastestKeyPressed: fastestKeyPressed,
-        score: score,
-      });
+      console.log(context.user.uid);
       onValue(ref(Database), (snapshot) => {
         const data = snapshot.val();
         let timer = JSON.stringify(time);
         if (data && context.user?.uid) {
           if (
-            data.ranking[timer][context.user?.uid].score < score ||
-            !data.ranking[timer][context.user?.uid].score
+            !data.ranking[timer][context.user?.uid] ||
+            data.ranking[timer][context.user?.uid].score < score
           ) {
-            console.log('asd');
+            set(ref(Database, `ranking/${time}/${context.user.uid}`), {
+              username: context.user.displayName,
+              timer: time,
+              correctKeys: correctKeys,
+              correctKeysPerSecond: correctKeys / time,
+              wrongKeys: wrongKeys,
+              wrongKeysPerSecond: wrongKeys / time,
+              fastestKeyPressed: fastestKeyPressed,
+              score: score,
+            });
           }
         }
       });
