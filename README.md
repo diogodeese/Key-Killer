@@ -18,7 +18,7 @@
     Key Killer is keyboard typing game, the objective is to press the key as fast as you can once it gets highlighted.
     <br />
     <br />
-    <a href="https://github.com/diogodeese/Key-Killer/issues">Report Bug</a>
+    <a href="https://github.com/diogodeese/Key-Killer/issues" target="blank">Report Bug</a>
     ·
     <a href="https://keykiller.diogodeese.com/">Play Key Killer</a>
     ·
