@@ -3,6 +3,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
+  <img src="public/android-chrome-192x192.png" alt="Logo" width="80" height="80" />
+
   <h3 align="center">Key Killer</h3>
   
   <!-- PROJECT SHIELDS -->
