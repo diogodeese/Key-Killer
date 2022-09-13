@@ -62,7 +62,7 @@
 <!-- LICENSE -->
 ## License
 
-Distributed under the GNU GPLv3 License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
