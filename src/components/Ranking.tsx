@@ -47,19 +47,17 @@ function Ranking() {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(ranking)
-              .sort()
-              .map((a: any, key: number) => {
-                return (
-                  <tr key={key}>
-                    <td>{key + 1}</td>
-                    <td>{ranking[a].username}</td>
-                    <td>{ranking[a].correctKeys}</td>
-                    <td>{ranking[a].wrongKeys}</td>
-                    <td>{Number(ranking[a].score).toFixed(2)}</td>
-                  </tr>
-                );
-              })}
+            {Object.keys(ranking).map((rank: any, key: number) => {
+              return (
+                <tr key={key}>
+                  <td>{key + 1}</td>
+                  <td>{ranking[rank].username}</td>
+                  <td>{ranking[rank].correctKeys}</td>
+                  <td>{ranking[rank].wrongKeys}</td>
+                  <td>{Number(ranking[rank].score).toFixed(2)}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
