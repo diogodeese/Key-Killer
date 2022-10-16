@@ -8,26 +8,6 @@
   box-sizing: border-box;
 }
 
-table,
-tr,
-td,
-th {
-  padding: 12px;
-}
-
-th {
-  font-size: 24px;
-  font-family: 'Oxanium', cursive;
-  color: white;
-}
-
-td {
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  border-top: solid 1px #94a3b8;
-}
-
 .title {
   font-size: 36px;
   font-family: 'Oxanium', cursive;
