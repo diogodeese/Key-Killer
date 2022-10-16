@@ -6,11 +6,6 @@ import Keyboard from './Keyboard.js';
 import * as Dialog from '@radix-ui/react-dialog';
 import { getItem } from 'local-data-storage';
 
-// Firebase
-import { UserAuth } from '../context/AuthContext.js';
-import { Database } from '../firebase.js';
-import { set, ref, onValue } from 'firebase/database';
-
 // Defining Variables
 let correctKeys = 0;
 let wrongKeys = 0;
@@ -28,6 +23,7 @@ interface FinalScore {
   wrongKeys: number;
   wrongKeysPerSecond?: number;
   fastestKeyPressed: number;
+  score?: number;
 }
 
 function getRandomNumber(min: number, max: number) {
@@ -77,8 +73,6 @@ function Game() {
     wrongKeys: 0,
     fastestKeyPressed: fastestKeyPressed,
   });
-  // Auth
-  const context = UserAuth();
 
   // Reset Scores
   function resetScores() {
@@ -126,48 +120,16 @@ function Game() {
       (correctKeys - wrongKeys) * 0.6 +
       (correctKeys / time - wrongKeys / time) * 0.4;
 
-    if (context?.user?.accessToken) {
-      setFinalScore({
-        username: context.user.displayName,
-        timer: time,
-        correctKeys: correctKeys,
-        correctKeysPerSecond: correctKeys / time,
-        wrongKeys: wrongKeys,
-        wrongKeysPerSecond: wrongKeys / time,
-        fastestKeyPressed: fastestKeyPressed,
-      });
-      console.log(context.user.uid);
-      onValue(ref(Database), (snapshot) => {
-        const data = snapshot.val();
-        let timer = JSON.stringify(time);
-        if (data && context.user?.uid) {
-          if (
-            !data.ranking[timer][context.user?.uid] ||
-            data.ranking[timer][context.user?.uid].score < score
-          ) {
-            set(ref(Database, `ranking/${time}/${context.user.uid}`), {
-              username: context.user.displayName,
-              timer: time,
-              correctKeys: correctKeys,
-              correctKeysPerSecond: correctKeys / time,
-              wrongKeys: wrongKeys,
-              wrongKeysPerSecond: wrongKeys / time,
-              fastestKeyPressed: fastestKeyPressed,
-              score: score,
-            });
-          }
-        }
-      });
-    } else {
-      setFinalScore({
-        timer: time,
-        correctKeys: correctKeys,
-        correctKeysPerSecond: correctKeys / time,
-        wrongKeys: wrongKeys,
-        wrongKeysPerSecond: wrongKeys / time,
-        fastestKeyPressed: fastestKeyPressed,
-      });
-    }
+    setFinalScore({
+      timer: time,
+      correctKeys: correctKeys,
+      correctKeysPerSecond: correctKeys / time,
+      wrongKeys: wrongKeys,
+      wrongKeysPerSecond: wrongKeys / time,
+      fastestKeyPressed: fastestKeyPressed,
+      score: score,
+    });
+
     const scoreTrigger = document.getElementById('scoreScreen');
     scoreTrigger?.click();
 
@@ -242,6 +204,9 @@ function Game() {
               <span className="text-xl">
                 The game lasted for {finalScore.timer} seconds!
               </span>
+              <br />
+              <br />
+              score: {finalScore.score}
               <br />
               <br />
               {finalScore.correctKeys > 1 ? (

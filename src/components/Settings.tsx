@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { setItem, getItem } from 'local-data-storage';
 import { timerOptions, defaultTimer } from '../settings/settings';
-import { UserAuth } from '../context/AuthContext';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 
 // Themes
 import defaultTheme from '../assets/default_theme.png';
-import { useNavigate } from 'react-router-dom';
 
-const settingsSections = ['Game', 'Themes', 'Account'];
+const settingsSections = ['Game', 'Themes'];
 
 function Game() {
   let initialIndex;
@@ -139,46 +137,6 @@ function Themes() {
   );
 }
 
-function Account() {
-  const navigate = useNavigate();
-  const context = UserAuth();
-
-  const handleLogOut = async () => {
-    if (context?.logOut) {
-      try {
-        context.logOut();
-        navigate('/');
-        location.reload();
-      } catch {
-        console.error('error');
-      }
-    }
-  };
-
-  return (
-    <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
-      <h2 className="title">Account Settings</h2>
-
-      <div className="flex flex-col text-start space-y-3">
-        <p className="text-lg text-slate-200">
-          Clearing your score will remove you from the ranking table
-        </p>
-        <button className="button warning">Clear Score</button>
-      </div>
-
-      <div className="flex flex-col text-start space-y-3">
-        <p className="text-lg text-slate-200">Log out from your account</p>
-        <button
-          className="button danger"
-          onClick={handleLogOut}
-        >
-          Log out
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function Settings() {
   const [settingsSection, setSettingsSection] = useState('Game');
 
@@ -203,8 +161,6 @@ function Settings() {
       {settingsSection === 'Game' && <Game />}
 
       {settingsSection === 'Themes' && <Themes />}
-
-      {settingsSection === 'Account' && <Account />}
     </div>
   );
 }
