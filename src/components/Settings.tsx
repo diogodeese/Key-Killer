@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { setItem, getItem } from 'local-data-storage';
-import { timerOptions, defaultTimer } from '../settings/settings';
+import { timerOptions, defaultTimer, themes } from '../settings/settings';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 
 // Themes
-import defaultTheme from '../assets/default_theme.png';
+import defaultTheme from '../assets/theme-default.png';
+import neonTheme from '../assets/theme-neon.png';
+import goldTheme from '../assets/theme-gold.png';
+import prideTheme from '../assets/theme-pride.png';
 
 const settingsSections = ['Game', 'Themes'];
 
@@ -96,14 +99,15 @@ function Game() {
 }
 
 function Themes() {
-  const themes = [
-    defaultTheme,
-    defaultTheme,
-    defaultTheme,
-    defaultTheme,
-    defaultTheme,
-    defaultTheme,
-  ];
+  const themePreview = [defaultTheme, neonTheme, goldTheme, prideTheme];
+
+  let theme;
+
+  if (getItem('theme')?.value) {
+    theme = themes[getItem('theme')?.value];
+  } else {
+    theme = themes[2];
+  }
 
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
@@ -124,7 +128,7 @@ function Themes() {
                   <RadioGroup.Indicator className="bg-white w-full h-full" />
                 </RadioGroup.Item>
                 <img
-                  src={theme}
+                  src={themePreview[key]}
                   width={370}
                   alt="default theme"
                 />

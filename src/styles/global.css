@@ -13,11 +13,27 @@
   }
 
   .theme-neon {
-    --color-pinky: green;
-    --color-ring: blue;
-    --color-middle: yellow;
-    --color-pointerout: red;
-    --color-pointerin: orange;
+    --color-pinky: #6930c3;
+    --color-ring: #5e60ce;
+    --color-middle: #4ea8de;
+    --color-pointerout: #56cfe1;
+    --color-pointerin: #80ffdb;
+  }
+
+  .theme-gold {
+    --color-pinky: #f9dc5c;
+    --color-ring: #f9dc5c;
+    --color-middle: #fae588;
+    --color-pointerout: #fcefb4;
+    --color-pointerin: #fdf8e1;
+  }
+
+  .theme-pride {
+    --color-pinky: #ff595e;
+    --color-ring: #ffca3a;
+    --color-middle: #8ac926;
+    --color-pointerout: #1982c4;
+    --color-pointerin: #6a4c93;
   }
 }
 
@@ -25,6 +41,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .title {
@@ -92,15 +117,6 @@
 .danger:hover {
   background-color: #b91c1c;
   transition: ease 0.2s;
-}
-
-.no-select {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 p {
