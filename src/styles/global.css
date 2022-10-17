@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root,
+  .theme-default {
+    --color-pinky: #dc143c;
+    --color-ring: #ff7f50;
+    --color-middle: #ff8c00;
+    --color-pointerout: #ffd700;
+    --color-pointerin: #f0e68c;
+  }
+
+  .theme-neon {
+    --color-pinky: green;
+    --color-ring: blue;
+    --color-middle: yellow;
+    --color-pointerout: red;
+    --color-pointerin: orange;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -107,55 +126,8 @@ li {
   font-size: 1em;
 }
 
-.pinky {
-  background-color: crimson;
-  border: 2px solid crimson;
+.key {
   box-shadow: -3px 4px 0 #333;
-}
-
-.ring {
-  background-color: coral;
-  border: 2px solid coral;
-  box-shadow: -3px 4px 0 #333;
-}
-
-.ring.selected {
-  color: coral;
-}
-
-.middle {
-  background-color: darkorange;
-  border: 2px solid darkorange;
-  box-shadow: -3px 4px 0 #333;
-}
-
-.middle.selected {
-  color: darkorange;
-}
-
-.pointer1st {
-  background-color: gold;
-  border: 2px solid gold;
-  box-shadow: -3px 4px 0 #333;
-}
-
-.pointer1st.selected {
-  color: gold;
-}
-
-.pointer2nd {
-  background-color: khaki;
-  border: 2px solid khaki;
-  box-shadow: -3px 4px 0 #333;
-}
-
-.pointer2nd.selected {
-  color: khaki;
-}
-
-.fill-out-key {
-  background-color: slategrey;
-  border: 2px solid slategrey;
 }
 
 .selected {
