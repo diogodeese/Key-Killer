@@ -35,4 +35,5 @@ export const themes = [
   'theme-neon',
   'theme-gold',
   'theme-pride',
+  'theme-nature',
 ];

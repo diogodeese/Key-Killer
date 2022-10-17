@@ -8,6 +8,7 @@ import defaultTheme from '../assets/theme-default.png';
 import neonTheme from '../assets/theme-neon.png';
 import goldTheme from '../assets/theme-gold.png';
 import prideTheme from '../assets/theme-pride.png';
+import natureTheme from '../assets/theme-nature.png';
 
 const settingsSections = ['Game', 'Themes'];
 
@@ -99,21 +100,30 @@ function Game() {
 }
 
 function Themes() {
-  const themePreview = [defaultTheme, neonTheme, goldTheme, prideTheme];
+  const themePreview = [
+    defaultTheme,
+    neonTheme,
+    goldTheme,
+    prideTheme,
+    natureTheme,
+  ];
 
   let theme;
 
   if (getItem('theme')?.value) {
     theme = themes[getItem('theme')?.value];
   } else {
-    theme = themes[2];
+    theme = themes[1];
   }
 
   return (
     <div className="flex flex-col w-[50%] text-start px-12 py-6 space-y-10">
       <h2 className="title">Themes</h2>
 
-      <RadioGroup.Root>
+      <RadioGroup.Root
+        defaultValue="default"
+        aria-label="View density"
+      >
         <div className="flex flex-wrap gap-8">
           {themes.map((theme, key) => {
             return (
@@ -121,16 +131,26 @@ function Themes() {
                 key={key}
                 className="border rounded p-2"
               >
-                <RadioGroup.Item
-                  value={theme}
-                  className="w-4 h-4 rounded-full bg-white "
-                >
-                  <RadioGroup.Indicator className="bg-white w-full h-full" />
-                </RadioGroup.Item>
+                <div className="w-full justify-center align-middle">
+                  <RadioGroup.Item
+                    value="unchecked"
+                    id={key.toString()}
+                    className="radio-item"
+                  >
+                    <RadioGroup.Indicator className="radio-indicator" />
+                  </RadioGroup.Item>
+                  <label
+                    htmlFor={key.toString()}
+                    className="text-white text-base font-semibold pl-4 capitalize"
+                  >
+                    {theme.toString().split('theme-')}
+                    {key.toString()}
+                  </label>
+                </div>
                 <img
                   src={themePreview[key]}
                   width={370}
-                  alt="default theme"
+                  alt="Theme"
                 />
               </div>
             );
