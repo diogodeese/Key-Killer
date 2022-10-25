@@ -113,7 +113,7 @@ function Themes() {
   if (getItem('theme')?.value) {
     theme = themes[getItem('theme')?.value];
   } else {
-    theme = themes[1];
+    theme = themes[0];
   }
 
   return (

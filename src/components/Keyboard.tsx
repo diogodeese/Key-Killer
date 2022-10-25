@@ -7,7 +7,7 @@ function Keyboard() {
   if (getItem('theme')?.value) {
     theme = themes[getItem('theme')?.value];
   } else {
-    theme = themes[4];
+    theme = themes[2];
   }
 
   return (
