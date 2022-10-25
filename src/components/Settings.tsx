@@ -141,10 +141,9 @@ function Themes() {
                   </RadioGroup.Item>
                   <label
                     htmlFor={key.toString()}
-                    className="text-white text-base font-semibold pl-4 capitalize"
+                    className="text-white text-lg font-semibold pl-4 capitalize"
                   >
                     {theme.toString().split('theme-')}
-                    {key.toString()}
                   </label>
                 </div>
                 <img
